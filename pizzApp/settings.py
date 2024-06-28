@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-tj4s!d0tl$=xy)!qwr8bt6#_9n!q$r$i$_zi6o7hp)etvstv52
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pizzaroo-pizza-delivery-app.onrender.com']
 
 
 # Application definition
