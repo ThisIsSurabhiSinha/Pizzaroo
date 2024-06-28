@@ -1,0 +1,8 @@
+services:
+  - name: web
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn pizzApp.wsgi:application  # Adjust 'pizzApp' to your actual project name
+    envVars:
+      DJANGO_SETTINGS_MODULE: pizzApp.settings  # Adjust 'pizzApp' to your actual project name
+    healthCheckPath: "/"
