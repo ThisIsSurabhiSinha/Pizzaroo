@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-tj4s!d0tl$=xy)!qwr8bt6#_9n!q$r$i$_zi6o7hp)etvstv52
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['pizzaroo-pizza-delivery-app.onrender.com','localhost']
+ALLOWED_HOSTS = ['pizzaroo-pizza-delivery-app.onrender.com','127.0.0.1']
 
 
 # Application definition
@@ -117,7 +117,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'pizzApp/static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 

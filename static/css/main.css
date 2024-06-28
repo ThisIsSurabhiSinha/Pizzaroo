@@ -1,0 +1,48 @@
+/* Style for buttons with .no-hover class */
+
+.table-rounded {
+    border-radius: 10px; /* Adjust the border radius as needed */
+    overflow: hidden; /* Ensures the rounded corners are respected */
+  }
+
+.no-hover {
+    background-color: #dc3545 !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Remove box-shadow and outline on hover/focus/active for .no-hover */
+.no-hover:hover,
+.no-hover:focus,
+.no-hover:active {
+    background-color: #dc3545 !important;
+    color: white !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+.custom-card {
+    position: relative;
+    transition: box-shadow 0.3s ease, border-left 0.3s ease !important;
+}
+
+.custom-card:hover {
+
+     box-shadow: 0 1rem 1rem rgb(5, 78, 90) !important; 
+    border-left: 0.5rem solid #0d6efd;
+}
+
+
+
+.boxShadow{
+    box-shadow:0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+
+
+  td{
+    align-content: center;
+  }
+
