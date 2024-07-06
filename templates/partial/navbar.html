@@ -1,0 +1,66 @@
+<main>
+  <div class="container-fluid">
+    <header class="d-flex py-3 mb-4 border-bottom flex-sm-column justify-content-around flex-lg-row flex-xl-row flex-xxl-row justify-content-sm-start sticky-top flex-column" style="background-color: ; ">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32">
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+        <span class="fs-4 text-danger navbar-brand">𝓟𝓲𝔃𝔃𝓪𝓻𝓸𝓸</span>
+      </a>
+
+      <ul class="nav nav-pills d-flex flex-lg-row flex-md-row justify-content-between flex-sm-row flex-column align-items-center">
+        <li class="nav-item">
+          <a href="{% url 'home' %}" class="nav-link" id="link_to_home" aria-current="page">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" id="link_to_about">About</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'track_orders' %}" class="nav-link" id="link_to_track_orders">Track Orders</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" id="link_to_contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Orders</a>
+        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link text-dark" aria-current="page" href="{% url 'cartPage' %}" id="link_to_cart">
+              <span class="badge badge-pill badge-dark showItem text-dark">0</span>
+              <i class="fa-solid fa-cart-shopping text-dark position-relative" data-bs-toggle="popover" data-bs-title="Cart Info" data-bs-content="Cart is empty"><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary text-dark">9 <span class="visually-hidden">Cart Items</span></span></i>
+            </a>
+          </li>
+        {% endif %}
+        <li class="nav-item">
+          <div class="flex-shrink-0 dropdown">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle nav-link" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i></a>
+            <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="">
+              <li>
+                <a class="dropdown-item" href="#">Settings</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Profile</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              {% if user.is_authenticated %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                </li>
+              {% else %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'signup' %}">Sign Up</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'login_user' %}">Login</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </header>
+  </div>
+</main>

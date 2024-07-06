@@ -651,3 +651,4 @@ async function displayCartItems() {
 document.addEventListener("DOMContentLoaded", () => {
   displayCartItems();
 });
+

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+       
+<div class="d-flex  align-items-center jusify-content-center" style="height: 100dvh;">
+        <main class="form-signin card shadow p-3 text-center rounded-5 w-100 ">
+            <form class="rounded-5" method="POST" action="login_user">
+          {% csrf_token %}
+              <h1 class="h3 mb-4 fw-normal my-3">Please sign in </h1>
+              {% include 'partial/messages.html' %}
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com" fdprocessedid="46fo4f">
+                <label for="floatingInput">Email address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" fdprocessedid="ww9a0j">
+                <label for="floatingPassword">Password</label>
+              </div>
+          
+              <div class="checkbox mb-3">
+                <label>
+                  <input type="checkbox" value="remember-me"> Remember me
+                </label>
+              </div>
+              <button class="w-100 btn btn-lg btn-primary" type="submit" fdprocessedid="4unan9">Sign in</button>
+              <p class="mt-5 mb-3 text-muted ">Dpn't have an account? Create account <a href="{% url 'signup'%}" class="text-decoration-none">Sign up</a></p>
+              <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
+            </form>
+          </main>
+        </div>
+      {% endblock content %}

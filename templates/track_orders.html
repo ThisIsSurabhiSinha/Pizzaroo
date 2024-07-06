@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/track_orders.css' %}" >
+{% endblock css %}
+
+{% block content %}
+{% include 'partial/navbar.html' %}
+{% include 'partial/messages.html' %}
+<div class="container">
+
+    <h1 class="text-center my-4">Track Orders</h1>
+
+  <!-- Search and Filter Options -->
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <input type="text" id="searchInput" class="form-control" placeholder="Search orders...">
+    </div>
+    <div class="col-md-3">
+      <select id="filterByDate" class="form-select">
+        <option value="">Filter by Date</option>
+        <!-- Add options dynamically if needed -->
+      </select>
+    </div>
+    <div class="col-md-3">
+      <select id="filterByStatus" class="form-select">
+        <option value="">Filter by Status</option>
+        <!-- Add options dynamically if needed -->
+      </select>
+    </div>
+    <div class="col-md-3">
+      <input type="text" id="filterByItem" class="form-control" placeholder="Filter by Item Name...">
+    </div>
+  </div>
+{% comment %} 
+  <div id="ordersList" class="row g-4">
+    <!-- Cards will be dynamically added here -->
+     {% if noItems %}
+     <p>No orders found for your account.</p>
+        <p>Start placing orders now to track them here!</p>
+        <!-- Optionally provide a link to the menu or ordering page -->
+        <p><a href="{% url 'home' %}">Explore our menu</a></p>
+
+        {% else %}
+        {% for order in allOrders  %}
+
+      <div class="col-md-6 col-lg-4">
+            <div class="card ">
+              <div class="card-body">
+                <h5 class="card-title">Order {{forloop.counter}}</h5>
+                <p class="card-text"><strong>Date:</strong> {{order.date |date:"D d M Y " }} </p>
+                <p class="card-text"><strong>Time:</strong> {{ order.date|time:"H:i:A" }}</p>
+                <p class="card-text"><strong>Status:</strong> {{order.status}}</p>
+                <p class="card-text"><strong>Amount Paid:</strong> <i class="fa-solid fa-indian-rupee-sign "></i>{{order.amount}} </p>
+                <p class="card-text"><strong>Total Items:</strong> 10</p>
+                <p class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+    </p>
+                <a href="#" class="card-link">View Details</a>
+                
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+     {% endif %}
+     
+  </div> {% endcomment %}
+  <div id="ordersList" class="row g-4">
+    {% if noItems %}
+        <p>No orders found for your account.</p>
+        <p>Start placing orders now to track them here!</p>
+        <!-- Optionally provide a link to the menu or ordering page -->
+        <p><a href="{% url 'home' %}">Explore our menu</a></p>
+    {% else %}
+        {% for order in allOrders %}
+            <div class="col-md-6 col-lg-4 order-card" data-status="{{ order.status }}">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Order {{forloop.counter}} </h5>
+                        <p class="card-text"><strong>Date:</strong> {{ order.date |date:"D d M Y " }}  </p>
+                        <p class="card-text"><strong>Time:</strong> {{ order.date|time:"H:i:A" }}</p>
+                        <p class="card-text"><strong>Status:</strong> {{ order.get_status_display }}</p>
+                        <p class="card-text"><strong>Amount Paid:</strong> <i class="fa-solid fa-indian-rupee-sign"></i>{{ order.amount|floatformat:"2" }}</p>
+                        <p class="card-text"><strong>Total Items:</strong> 10</p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width:10%;"></div>
+                        </div>
+                         <a href="{% url 'order_details' order.order_id %}" class="card-link">View Details</a> 
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+</div>
+
+<script src="{% static "js/track_orders.js"%}"></script>
+{% endblock content %}
+
+{% block js %}
+<script>
+  all_nav_links=document.querySelectorAll(".nav-link");
+  all_nav_links.forEach((nav_link)=>{
+    nav_link.classList.remove("active");
+  })
+    document.querySelector("#link_to_track_orders").classList.add("active");
+    // track_orders.js
+
+document.addEventListener('DOMContentLoaded', function() {
+  const orders = document.querySelectorAll('.order-card');
+
+  orders.forEach(order => {
+      const status = order.dataset.status;
+      const progressBar = order.querySelector('.progress-bar');
+      console.log(progressBar);
+      switch(status) {
+
+          case 'ORDER_RECEIVED':
+              progressBar.style.width = '20%';
+              progressBar.classList.add('bg-primary'); // Green color for delivered
+              break;
+          case 'DELIVERED':
+              progressBar.style.width = '100%';
+              progressBar.classList.add('bg-success'); // Red color for cancelled
+              progressBar.classList.remove('progress-bar-animated')
+              break;
+              case 'PREPARING':
+              progressBar.style.width = '40%';
+              progressBar.classList.add('bg-primary'); 
+              break;
+              case 'CANCELLED':
+              progressBar.style.width = '100%';
+              progressBar.classList.add('bg-danger');
+              progressBar.classList.remove('progress-bar-animated') 
+              break;
+              case 'ON_THE_WAY':
+              progressBar.style.width = '80%';
+              progressBar.classList.add('bg-primary'); 
+              break;
+          default:
+              progressBar.style.width = '25%'; 
+              progressBar.classList.add('bg-primary');
+              break;
+
+      }
+  });
+});
+
+</script>
+{% endblock js %}

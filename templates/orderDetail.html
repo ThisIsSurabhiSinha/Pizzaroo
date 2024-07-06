@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partial/navbar.html' %}
+{% include 'partial/messages.html' %}
+<div class="container p-2 bg-tertiary bg-gradient" style="background-color:">
+  <h1 class="text-center">Order Summary</h1>
+  <h3 class="text-center text-danger">Pizzaroo</h3>
+  <p class="text-muted text-center">This order was delivered</p>
+  <div class="row d-flex flex-column">
+    {% for order_pizza in order_pizzas %}
+    <div class="col">
+      <div class="card border-bottom bg-gray shadow rounded" style="background-color: ">
+        <div class="card-body">
+          <div class="card-title text-primary">{{ order_pizza.pizza.name }}</div>
+          <div class="row">
+            <p class="card-text col-lg-2 col-sm-4"><span class="text-muted">Quantity:</span> {{ order_pizza.quantity }}</p>
+            <p class="card-text col-lg-2 col-sm-4"><span class="text-muted">Size:</span> {{ order_pizza.pizza.size.size }}</p>
+            <p class="card-text col-lg-2 col-sm-4"><span class="text-muted">Crust:</span> {{ order_pizza.pizza.base.base_type }}</p>
+            <p class="card-text col-lg-2 col-sm-4"><span class="text-muted">Extra Cheese:</span> {{ order_pizza.pizza.extra_cheese.cheese_option }}</p>
+            <p class="card-text col-lg-2 col-sm-4"><span class="text-muted">Price:</span>
+              <i class="fa-solid fa-indian-rupee-sign"></i> {{ order_pizza.price|floatformat:"2" }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="col">
+      <div class="card shadow bg-light rounded">
+        <div class="card-body">
+          <div class="col d-flex justify-content-between">
+            <span class="text-muted">Item total:</span>
+            <span><i class="fa-solid fa-indian-rupee-sign"></i> {{ order_detail.amount|floatformat:"2" }}</span>
+          </div>
+          <div class="col d-flex justify-content-between">
+            <span class="text-muted">Ordered at:</span>
+            <span>{{ order_detail.date|time:"H:i A" }} on {{ order_detail.date|date:"D d M Y" }}</span>
+          </div>
+          <div class="col d-flex justify-content-between">
+            <span class="text-muted">Delivered at:</span>
+            <span>{{ order_detail.address }}</span>
+          </div>
+          <div class="col d-flex justify-content-between">
+            <span class="text-muted">Phone number:</span>
+            <span>{{ order_detail.phone_number }}</span>
+          </div>
+          <div class="col d-flex justify-content-between">
+            <span class="text-muted">Email:</span>
+            <span>{{ order_detail.customer_name.email }}</span>
+          </div>
+          
+        </div>
+        
+      </div>
+      <div class="col d-flex justify-content-center mt-3">
+        <span class="text-muted">Thank you for choosing Pizzaroo! We hope you enjoyed your meal. Looking forward to serving you again soon!</span>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+
+{% comment %} {% extends 'base.html' %} 
+{% load static %} 
+{% block content %} 
+{% include 'partial/navbar.html' %} 
+{% include 'partial/messages.html' %}
+<div class="container p-2" style="background-color:aliceblue">
+  <h1 class=" text-center ">Order Summary</h1>
+  <h3 class="text-center text-danger">Pizzaroo</h3>
+  <p class="text-muted text-center">This order was delivered</p>
+  <div class="row d-flex flex-column">
+    {% for pizza in order_detail.pizza.all  %}
+    <div class="col">
+      <div
+        class="card border-bottom shadow"
+        style="background-color: #f4f4c5d2"
+      >
+        <div class="card-body">
+          <div class="card-title text-primary">{{pizza.name}}</div>
+          <div class="row">
+            <p class="card-text col-lg-2 col-sm-4">
+              <span >Quantity:</span> {{pizza.quantity}}1
+            </p>
+            <p class="card-text col-lg-2 col-sm-4">
+              <span>Size:</span> {{pizza.size.size}}
+            </p>
+            <p class="card-text col-lg-2 col-sm-4">
+              <span>Crust:</span> {{pizza.base.base_type}}
+            </p>
+            <p class="card-text col-lg-2 col-sm-4">
+              <span>Extra Cheese:</span> {{pizza.extra_cheese}}
+            </p>
+            <p class="card-text col-lg-2 col-sm-4">
+              <span>Price:</span>
+              <i class="fa-solid fa-indian-rupee-sign"></i> {{pizza.calculate_price|floatformat:"2" }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="col">
+      <div class="card shadow bg-light">
+   <div class="card-body">
+    <div class="col d-flex justify-content-between">
+      <span class="text-muted">Item total:</span>
+      <span><i class="fa-solid fa-indian-rupee-sign"></i>{{order_detail.amount|floatformat:"2"}} </span>
+    </div>
+    <div class="col d-flex justify-content-between">
+      <span class="text-muted">Ordered at:</span>
+      <span>{{ order_detail.date|time:"H:i A" }} on {{ order_detail.date |date:"D d M Y " }} </span>
+    </div>
+    <div class="col d-flex justify-content-between">
+      <span class="text-muted">Delivered at:</span>
+      <span>{{order_detail.address}}</span>
+    </div>
+    <div class="col d-flex justify-content-between">
+      <span class="text-muted">Phone number:</span>
+      <span>{{order_detail.phone_number}}</span>
+    </div>
+    <div class="col d-flex justify-content-between">
+      <span class="text-muted">Email:</span>
+      <span>{{order_detail.email}}</span>
+    </div>
+   </div>
+      </div>                       
+      
+    </div>
+  </div>
+</div>
+{% endblock content %} {% endcomment %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="d-flex  align-items-center jusify-content-center rounded-5" style="height: 100dvh;">
+        <main class="form-signin card shadow p-3 text-center rounded-5 w-100 ">
+            <form class="rounded-5" method="POST" action="signup">
+            {% csrf_token %}
+              <h1 class="h3 mb-4 fw-normal my-3 text-dark">Please Sign Up</h1>
+              {% include 'partial/messages.html' %}
+
+                <div class="form-floating mb-3">
+                  
+                  <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required="" fdprocessedid="5v3ant" autofill>
+                  <label for="firstName" class="form-label">First name</label>
+                  <div class="invalid-feedback">
+                    Valid first name is required.
+                  </div>
+                </div>
+        
+                <div class="form-floating mb-3">
+                 
+                  <input type="text" class="form-control" id="lastName" placeholder="" name="lastName" value="" required="" fdprocessedid="1yk08" autofill> 
+                  <label for="lastName" class="form-label">Last name</label>
+                  <div class="invalid-feedback">
+                    Valid last name is required.
+                  </div>
+                </div>
+        
+              <div class="form-floating mb-3">
+                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" fdprocessedid="46fo4f">
+                <label for="floatingInput">Email address</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone number" required="" fdprocessedid="9p0l23" autofill>
+                <label for="phoneNumber" class="form-label">Phone number</label>
+                <div class="invalid-feedback">
+                  Please enter a valid phone number.
+                </div>
+              </div>
+              
+              <div class="form-floating mb-3">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" fdprocessedid="ww9a0j">
+                <label for="floatingPassword">Password</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" name="confirmPassword" id="floatingConfirmPassword" placeholder="Password" fdprocessedid="ww9a0j">
+                <label for="floatingConfirmPassword">Confirm Password</label>
+              </div>
+          
+          
+              <div class="checkbox mb-3">
+                <label>
+                  <input type="checkbox" value="remember-me"> Remember me
+                </label>
+              </div>
+              <button class="w-100 btn btn-lg btn-primary" type="submit" fdprocessedid="4unan9">Sign in</button>
+              <p class="mt-5 mb-3 text-muted">Already have an account? <a href="{% url 'login_user' %}" class="text-decoration-none">Login</a></p>
+              <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
+            </form>
+          </main>
+        </div>
+      {% endblock content %}

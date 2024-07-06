@@ -47,7 +47,7 @@ const increaseQuantity = (e) => {
 
 const updatePrice = async (e) => {
   
-  const URL_FOR_PRICE_UPDATE = "http://127.0.0.1:8000/calculatePrice";
+  const URL_FOR_PRICE_UPDATE = "https://pizzaroo-pizza-delivery-app.onrender.com/calculatePrice";
   const form = e.target.closest(".customiziationForm");
   //form.preventDefault();
   if (!form) {
